@@ -11,10 +11,10 @@ int main(){
     cout<<"After appending :"<<endl;
     cout<<"String 1:"<<a<<endl;
     cout<<"String 2:"<<b<<endl;
+
+
+
     
-
-
-
 
 
     // a.erase(2, 3);
