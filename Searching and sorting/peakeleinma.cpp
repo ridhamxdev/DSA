@@ -1,1 +1,0 @@
-/* Peek element in a mountain array*/
