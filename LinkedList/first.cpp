@@ -73,6 +73,49 @@ void insertAtPosition(Node* &head,Node* &tail,int pos,int data){
 }
 
 }
+
+void deleteNode(Node* &head,Node* &tail,int pos){
+    if(pos<1){
+        cout<<"Invalid Position"<<endl;
+        return;
+    }
+    if(head==NULL){
+        cout<<"List is empty"<<endl;
+        return;
+    }
+    if(head==tail){
+        delete head;
+        head=NULL;
+        tail=NULL;
+        return;
+    }
+    if(pos==1){
+        Node*temp=head;
+        head=head->next;
+        temp->next=NULL;
+        delete temp;
+    }else if(pos==LengthLL(head)){
+        Node* prev=head;
+        while(prev->next!=tail){
+            prev=prev->next;
+        }
+        prev->next=NULL;
+        delete tail;
+        tail=prev;
+    }else{
+        Node* prev=NULL;
+        Node* curr=head;
+        while(pos!=1){
+            pos--;
+            prev=curr;
+            curr=curr->next;
+        }
+        prev->next=curr->next;
+        curr->next=NULL;
+        delete curr;
+    }
+}
+
 int main(){
     Node *first=new Node(10);
     Node *second=new Node(20);
@@ -95,13 +138,18 @@ int main(){
 
 
     Node *tail=fifth;
-    insertAtHead(head,tail,17);
-    printLL(head);
+    // insertAtHead(head,tail,17);
+    // printLL(head);
 
-    insertAtTail(head,tail,60);
-    printLL(head);
+    // insertAtTail(head,tail,60);
+    // printLL(head);
 
-    insertAtPosition(head,tail,3,25);
+    // insertAtPosition(head,tail,3,25);
+    // printLL(head);
+
+
+
+    deleteNode(head,tail,5);
     printLL(head);
 
 return 0;
