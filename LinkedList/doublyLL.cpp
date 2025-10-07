@@ -90,20 +90,40 @@ void insertAtPosition(Node* &head,Node* &tail,int data,int pos){
 }
 
 void deleteNode(Node* &head,Node* &tail,int pos){
-    if(pos<=1){
+
+    if(head==tail){
+        Node* temp=head;
+        delete temp;
+        head=NULL;
+        tail=NULL;
+        return;
+    }
+    else if(pos<=1){
         Node* temp=new Node();
         temp=head;
         head=temp->next;
+        temp->next=NULL;
         head->prev=NULL;
         delete temp;
     }else if(pos>=LengthLL(head)){
-        Node* temp=new Node();
-        temp=tail;
-        tail=temp->prev;
-        tail->next=NULL;
-        delete temp;
+        Node* temp=tail->prev;
+        temp->next=NULL;
+        tail->prev=NULL;
+        delete tail;
+        tail=temp;
     }else{
-        Node* temp=new Node();
+        // Node* temp=new Node();
+        // Node* prevNode=NULL;
+        // Node* currNode=head;
+        // while(pos!=1){
+        //     pos--;
+        //     prevNode=currNode;
+        //     currNode=currNode->next;
+        // }
+        // prevNode->next=currNode->next;
+        // currNode->next->prev=prevNode;
+        // delete currNode;
+
         Node* prevNode=NULL;
         Node* currNode=head;
         while(pos!=1){
@@ -111,8 +131,11 @@ void deleteNode(Node* &head,Node* &tail,int pos){
             prevNode=currNode;
             currNode=currNode->next;
         }
-        prevNode->next=currNode->next;
-        currNode->next->prev=prevNode;
+        Node *nextNode=currNode->next;
+        prevNode->next=nextNode;
+        nextNode->prev=prevNode;
+        currNode->next=NULL;
+        currNode->prev=NULL;
         delete currNode;
     }
 }
