@@ -89,6 +89,34 @@ void insertAtPosition(Node* &head,Node* &tail,int data,int pos){
     }
 }
 
+void deleteNode(Node* &head,Node* &tail,int pos){
+    if(pos<=1){
+        Node* temp=new Node();
+        temp=head;
+        head=temp->next;
+        head->prev=NULL;
+        delete temp;
+    }else if(pos>=LengthLL(head)){
+        Node* temp=new Node();
+        temp=tail;
+        tail=temp->prev;
+        tail->next=NULL;
+        delete temp;
+    }else{
+        Node* temp=new Node();
+        Node* prevNode=NULL;
+        Node* currNode=head;
+        while(pos!=1){
+            pos--;
+            prevNode=currNode;
+            currNode=currNode->next;
+        }
+        prevNode->next=currNode->next;
+        currNode->next->prev=prevNode;
+        delete currNode;
+    }
+}
+
 int main(){
     Node* head=NULL;
     Node* tail=NULL;
@@ -98,12 +126,21 @@ int main(){
     insertAtHead(head,tail,20);
     insertAtHead(head,tail,10);
     insertAtTail(head,tail,60);
+    insertAtTail(head,tail,70);
     printLL(head);
 
 
     cout<<"Afer inserting at position"<<endl;
 
     insertAtPosition(head,tail,25,3);
+    printLL(head);
+
+    // cout<<"After deleting a node at head"<<endl;
+
+    // deleteNode(head,tail,1);
+    // printLL(head);
+    cout<<"After deleting a node at tail"<<endl;
+    deleteNode(head,tail,8);
     printLL(head);
     return 0;
 }
